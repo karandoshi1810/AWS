@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Site on EC2</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 80px; background: #f4f4f4; }
+    h1 { color: #232f3e; }
+    .badge { background: #146eb4; color: white; padding: 8px 16px; border-radius: 20px; display: inline-block; }
+    .box { margin-top: 30px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h1>⚡ Dynamic Website Hosted on EC2</h1>
+  <p class="badge">Served by Apache + PHP</p>
+
+  <div class="box">
+    <p>Current Server Time: <strong><?php echo date("Y-m-d H:i:s"); ?></strong></p>
+    <p>Your Visitor IP: <strong><?php echo $_SERVER['REMOTE_ADDR']; ?></strong></p>
+    <p>Page Refresh Count (session-based):
+      <strong>
+        <?php
+          session_start();
+          if (!isset($_SESSION['count'])) {
+              $_SESSION['count'] = 1;
+          } else {
+              $_SESSION['count']++;
+          }
+          echo $_SESSION['count'];
+        ?>
+      </strong>
+    </p>
+  </div>
+</body>
+</html>
